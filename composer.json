@@ -1,0 +1,43 @@
+{
+    "name": "somnambulist/value-objects",
+    "type": "library",
+    "description": "A simple value-object implementation for use in Entities. Includes a couple of basic types.",
+    "keywords": [
+        "value objects",
+        "entities",
+        "ddd",
+        "domain events"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dave Redfern",
+            "email": "dave@scorpioframework.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Somnambulist\\ValueObjects\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Somnambulist\\Tests\\ValueObjects\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=7",
+        "ext-mbstring": "*",
+        "beberlei/assert": "2.7.*",
+        "eloquent/enumeration": "5.1.*",
+        "somnambulist/collection": "1.3.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.2",
+        "ramsey/uuid": "~3.6.0"
+    },
+    "config": {
+        "preferred-install": "dist",
+        "bin-dir": "bin"
+    }
+}
