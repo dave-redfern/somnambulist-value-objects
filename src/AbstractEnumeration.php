@@ -29,6 +29,49 @@ use Somnambulist\ValueObjects\Contracts\ValueObjectInterface;
  */
 abstract class AbstractEnumeration extends BaseEnumeration implements ValueObjectInterface
 {
+    /**
+     * @var array
+     */
+    protected static $cache = [];
+
+    /**
+     * @return array
+     */
+    public static function values()
+    {
+        $class = get_called_class();
+
+        if (!isset(static::$cache[$class])) {
+            static::$cache[$class] = [];
+
+            /** @var static $member */
+            foreach (static::members() as $member) {
+                static::$cache[$class][$member->key()] = $member->value();
+            }
+        }
+
+        return static::$cache[$class];
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return bool
+     */
+    public static function hasKey($value)
+    {
+        return in_array($value, array_keys(static::values()));
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return bool
+     */
+    public static function hasValue($value)
+    {
+        return in_array($value, array_values(static::values()));
+    }
 
     /**
      * @return string

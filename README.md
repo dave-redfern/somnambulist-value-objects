@@ -78,3 +78,8 @@ be instantiated empty so your methods / toString() should handle that case e.g.:
 A User has a nullable Profile VO, when Doctrine hydrates the User, the Profile VO will also be hydrated but
 empty, so if the Profile has a nickname() or avatar() method, these must support returning null and your
 toString() method must cast null to a string to avoid type errors.
+
+### Links
+
+ * [Doctrine](http://doctrine-project.org)
+ * [Enumeration Bridge](https://github.com/dave-redfern/somnambulist-doctrine-enum-bridge)
