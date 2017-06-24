@@ -53,6 +53,18 @@ class DateTimeTest extends TestCase
      * @group value-objects
      * @group value-objects-date-time
      */
+    public function testNow()
+    {
+        $vo = DateTime::now();
+
+        $this->assertEquals(date('Y-m-d H:i:s'), $vo->toString());
+        $this->assertEquals('America/Toronto', (string)$vo->timezone());
+    }
+
+    /**
+     * @group value-objects
+     * @group value-objects-date-time
+     */
     public function testCreateFromFormat()
     {
         $vo = DateTime::createFromFormat('Y-m-d H:i:s', '2017-06-17 12:00:00');

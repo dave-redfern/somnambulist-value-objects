@@ -31,6 +31,14 @@ class DateTime extends \DateTimeImmutable implements ValueObjectInterface
 {
 
     /**
+     * @return DateTime
+     */
+    public static function now()
+    {
+        return static::parse('now', TimeZone::create());
+    }
+
+    /**
      * Creates a DateTime instance from the time string and TimeZone
      *
      * @param string   $time Any valid datetime string that can be processed by date()
