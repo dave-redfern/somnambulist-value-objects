@@ -33,7 +33,7 @@ class EmailAddress extends AbstractValueObject
     /**
      * @var string
      */
-    private $email;
+    private $value;
 
     /**
      * Constructor.
@@ -44,7 +44,7 @@ class EmailAddress extends AbstractValueObject
     {
         Assert::that($email, null, 'email')->notEmpty()->email()->maxLength(60);
 
-        $this->email = $email;
+        $this->value = $email;
     }
 
     /**
@@ -52,7 +52,7 @@ class EmailAddress extends AbstractValueObject
      */
     public function toString(): string
     {
-        return (string)$this->email;
+        return (string)$this->value;
     }
 
     /**
@@ -60,7 +60,7 @@ class EmailAddress extends AbstractValueObject
      */
     public function account(): string
     {
-        return mb_substr($this->email, 0, mb_strpos($this->email, '@'));
+        return mb_substr($this->value, 0, mb_strpos($this->value, '@'));
     }
 
     /**
@@ -68,6 +68,6 @@ class EmailAddress extends AbstractValueObject
      */
     public function domain(): string
     {
-        return mb_substr($this->email, mb_strpos($this->email, '@')+1);
+        return mb_substr($this->value, mb_strpos($this->value, '@') + 1);
     }
 }

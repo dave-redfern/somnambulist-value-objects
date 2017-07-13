@@ -39,5 +39,9 @@
     "config": {
         "preferred-install": "dist",
         "bin-dir": "bin"
+    },
+    "suggest": {
+        "giggsey/libphonenumber-for-php": "*",
+        "propaganistas/laravel-phone": "*"
     }
 }

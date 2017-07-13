@@ -2,6 +2,7 @@
 
 namespace Somnambulist\Tests\ValueObjects\Types\Identity;
 
+use Assert\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Somnambulist\ValueObjects\Types\Identity\EmailAddress;
 
@@ -23,6 +24,17 @@ class EmailAddressTest extends TestCase
         $vo = new EmailAddress('foo@example.com');
 
         $this->assertEquals('foo@example.com', $vo->toString());
+    }
+
+    /**
+     * @group value-objects
+     * @group value-objects-email-address
+     */
+    public function testCreateRaisesExceptionForInvalidArguments()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        new EmailAddress('foo');
     }
 
     /**
