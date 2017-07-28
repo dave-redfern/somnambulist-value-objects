@@ -18,8 +18,10 @@
 
 namespace Somnambulist\ValueObjects\Types\DateTime;
 
-use DateTimeZone;
 use Somnambulist\ValueObjects\Contracts\ValueObjectInterface;
+use Somnambulist\ValueObjects\Types\DateTime\Traits\Comparable;
+use Somnambulist\ValueObjects\Types\DateTime\Traits\Factory;
+use Somnambulist\ValueObjects\Types\DateTime\Traits\Stringable;
 
 /**
  * Class DateTime
@@ -30,94 +32,9 @@ use Somnambulist\ValueObjects\Contracts\ValueObjectInterface;
 class DateTime extends \DateTimeImmutable implements ValueObjectInterface
 {
 
-    /**
-     * @return DateTime
-     */
-    public static function now()
-    {
-        return static::parse('now', TimeZone::create());
-    }
-
-    /**
-     * Creates a DateTime instance from the time string and TimeZone
-     *
-     * @param string   $time Any valid datetime string that can be processed by date()
-     * @param TimeZone $tz
-     *
-     * @return static
-     */
-    public static function parse($time = 'now', TimeZone $tz)
-    {
-        return new static($time, $tz->toNative());
-    }
-
-    /**
-     * Create a DateTime instance
-     *
-     * Based on Carbon::create with the following differences:
-     *  * if you require an hour, you must specify minutes and seconds as 0 (zero)
-     *  * TimeZone should be specified using the value object
-     *
-     * @param null|int      $year
-     * @param null|int      $month
-     * @param null|int      $day
-     * @param null|int      $hour
-     * @param null|int      $minute
-     * @param null|int      $second
-     * @param null|TimeZone $tz
-     *
-     * @return bool|DateTime
-     */
-    public static function create($year = null, $month = null, $day = null, $hour = null, $minute = null, $second = null, TimeZone $tz = null)
-    {
-        [$nowYear, $nowMonth, $nowDay, $nowHour, $nowMin, $nowSec] = explode('-', date('Y-n-j-G-i-s', time()));
-
-        $year   = $year ?? $nowYear;
-        $month  = $month ?? $nowMonth;
-        $day    = $day ?? $nowDay;
-        $hour   = $hour ?? $nowHour;
-        $minute = $minute ?? $nowMin;
-        $second = $second ?? $nowSec;
-        $tz     = $tz ?? TimeZone::create();
-
-        return static::createFromFormat(
-            'Y-n-j G:i:s',
-            sprintf('%s-%s-%s %s:%02s:%02s', $year, $month, $day, $hour, $minute, $second),
-            $tz->toNative()
-        );
-    }
-
-    /**
-     * @param string            $format
-     * @param string            $time
-     * @param null|DateTimeZone $object
-     *
-     * @return static
-     */
-    public static function createFromFormat($format, $time, $object = null)
-    {
-        if ($object !== null) {
-            $dt = parent::createFromFormat($format, $time, $object);
-        } else {
-            $dt = parent::createFromFormat($format, $time);
-        }
-
-        $lastErrors = parent::getLastErrors();
-
-        if ($dt instanceof \DateTimeInterface) {
-            return new static($dt->format('Y-m-d H:i:s.u'), $dt->getTimezone());
-        }
-
-        throw new \InvalidArgumentException(implode(PHP_EOL, $lastErrors['errors']));
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->toString();
-    }
+    use Comparable;
+    use Factory;
+    use Stringable;
 
     /**
      * @param string $name
@@ -126,28 +43,6 @@ class DateTime extends \DateTimeImmutable implements ValueObjectInterface
     public function __set($name, $value)
     {
         // prevent arbitrary properties
-    }
-
-    /**
-     * @param mixed $object
-     *
-     * @return bool
-     */
-    public function equals($object): bool
-    {
-        if (get_class($object) !== get_class($this)) {
-            return false;
-        }
-
-        return $this->toString() === $object->toString() && $this->timezone()->equals($object->timezone());
-    }
-
-    /**
-     * @return string
-     */
-    public function toString(): string
-    {
-        return $this->format('Y-m-d H:i:s');
     }
 
     /**
@@ -214,125 +109,43 @@ class DateTime extends \DateTimeImmutable implements ValueObjectInterface
         return (int)$this->format('s');
     }
 
-
-
     /**
-     * Format the instance as date
-     *
-     * @return string
+     * @return int
      */
-    public function toDateString()
+    public function timestamp(): int
     {
-        return $this->format('Y-m-d');
+        return (int)$this->format('U');
     }
 
     /**
-     * Format the instance as a readable date
-     *
-     * @return string
+     * @return int
      */
-    public function toFormattedDateString()
+    public function weekOfYear(): int
     {
-        return $this->format('M j, Y');
+        return (int)$this->format('W');
     }
 
     /**
-     * Format the instance as time
-     *
-     * @return string
+     * @return int
      */
-    public function toTimeString()
+    public function daysInMonth(): int
     {
-        return $this->format('H:i:s');
+        return (int)$this->format('t');
     }
 
     /**
-     * Format the instance as date and time
-     *
-     * @return string
+     * @return int
      */
-    public function toDateTimeString()
+    public function dayOfWeek(): int
     {
-        return $this->format('Y-m-d H:i:s');
+        return (int)$this->format('w');
     }
 
     /**
-     * Format the instance with day, date and time
-     *
-     * @return string
+     * @return int
      */
-    public function toDayDateTimeString()
+    public function dayOfYear(): int
     {
-        return $this->format('D, M j, Y g:i A');
-    }
-
-    /**
-     * Format the instance as ATOM
-     *
-     * @return string
-     */
-    public function toAtomString()
-    {
-        return $this->format(\DateTime::ATOM);
-    }
-
-    /**
-     * Format the instance as COOKIE
-     *
-     * @return string
-     */
-    public function toCookieString()
-    {
-        return $this->format(\DateTime::COOKIE);
-    }
-
-    /**
-     * Format the instance as ISO8601
-     *
-     * @return string
-     */
-    public function toIso8601String()
-    {
-        return $this->toAtomString();
-    }
-
-    /**
-     * Format the instance as RFC822
-     *
-     * @return string
-     */
-    public function toRfc822String()
-    {
-        return $this->format(\DateTime::RFC822);
-    }
-
-    /**
-     * Format the instance as RFC2822
-     *
-     * @return string
-     */
-    public function toRfc2822String()
-    {
-        return $this->format(\DateTime::RFC2822);
-    }
-
-    /**
-     * Format the instance as RSS
-     *
-     * @return string
-     */
-    public function toRssString()
-    {
-        return $this->format(\DateTime::RSS);
-    }
-
-    /**
-     * Format the instance as W3C
-     *
-     * @return string
-     */
-    public function toW3cString()
-    {
-        return $this->format(\DateTime::W3C);
+        return (int)$this->format('z');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Somnambulist\Tests\ValueObjects\Types\DateTime\DateTime;
 
+use Somnambulist\Tests\ValueObjects\Types\DateTime\Helpers;
 use Somnambulist\ValueObjects\Types\DateTime\DateTime;
 use PHPUnit\Framework\TestCase;
 
@@ -14,10 +15,7 @@ use PHPUnit\Framework\TestCase;
 class ToStringTest extends TestCase
 {
 
-    protected function setUp()
-    {
-        date_default_timezone_set('America/Toronto');
-    }
+    use Helpers;
 
     /**
      * @group value-objects

@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+2017-07-28
+----------
+
+ * added more DateTime support methods
+ * split DateTime into separate traits for easier maintenance
+
 2017-06-24
 ----------
 
