@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+2017-08-07
+----------
+
+ * added some modifier methods for easier modifications to date and time
+ 
 2017-07-28
 ----------
 

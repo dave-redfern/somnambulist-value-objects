@@ -21,6 +21,7 @@ namespace Somnambulist\ValueObjects\Types\DateTime;
 use Somnambulist\ValueObjects\Contracts\ValueObjectInterface;
 use Somnambulist\ValueObjects\Types\DateTime\Traits\Comparable;
 use Somnambulist\ValueObjects\Types\DateTime\Traits\Factory;
+use Somnambulist\ValueObjects\Types\DateTime\Traits\Modifiers;
 use Somnambulist\ValueObjects\Types\DateTime\Traits\Stringable;
 
 /**
@@ -34,6 +35,7 @@ class DateTime extends \DateTimeImmutable implements ValueObjectInterface
 
     use Comparable;
     use Factory;
+    use Modifiers;
     use Stringable;
 
     /**
