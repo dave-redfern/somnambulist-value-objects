@@ -52,6 +52,6 @@ class Uuid extends AbstractValueObject
      */
     public function toString(): string
     {
-        return $this->uuid;
+        return (string)$this->uuid;
     }
 }

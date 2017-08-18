@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+2017-08-18
+----------
+
+ * force cast toString() to always return strings
+
 2017-08-07
 ----------
 

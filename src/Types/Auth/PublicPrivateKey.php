@@ -63,7 +63,7 @@ class PublicPrivateKey extends AbstractValueObject
      */
     public function toString(): string
     {
-        return $this->publicKey;
+        return (string)$this->publicKey;
     }
 
     /**

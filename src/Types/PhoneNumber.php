@@ -36,6 +36,6 @@ class PhoneNumber extends AbstractValueObject
      */
     public function toString(): string
     {
-        return $this->value;
+        return (string)$this->value;
     }
 }
