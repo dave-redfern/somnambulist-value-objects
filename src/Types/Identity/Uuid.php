@@ -33,7 +33,7 @@ class Uuid extends AbstractValueObject
     /**
      * @var string
      */
-    private $uuid;
+    private $value;
 
     /**
      * Constructor.
@@ -44,7 +44,7 @@ class Uuid extends AbstractValueObject
     {
         Assert::that($uuid, null, 'uuid')->notEmpty()->uuid();
 
-        $this->uuid = $uuid;
+        $this->value = $uuid;
     }
 
     /**
@@ -52,6 +52,6 @@ class Uuid extends AbstractValueObject
      */
     public function toString(): string
     {
-        return (string)$this->uuid;
+        return (string)$this->value;
     }
 }

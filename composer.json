@@ -12,7 +12,7 @@
     "authors": [
         {
             "name": "Dave Redfern",
-            "email": "dave@scorpioframework.com"
+            "email": "info@somnambulist.tech"
         }
     ],
     "autoload": {
@@ -30,11 +30,11 @@
         "ext-mbstring": "*",
         "beberlei/assert": "~2.7",
         "eloquent/enumeration": "5.1.*",
-        "somnambulist/collection": "~2.0"
+        "somnambulist/collection": "~2.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "~6.2",
-        "ramsey/uuid": "~3.6.0"
+        "phpunit/phpunit": "~6.3",
+        "ramsey/uuid": "~3.7"
     },
     "config": {
         "preferred-install": "dist",

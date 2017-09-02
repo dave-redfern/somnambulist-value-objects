@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+2017-09-02
+----------
+
+ * changed property name from uuid to value in Uuid
+ * updated dependencies
+
 2017-08-18
 ----------
 
