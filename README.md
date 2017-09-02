@@ -35,40 +35,41 @@ method (equals()) uses reflection on the VO properties and compares them directl
 
 For example:
 
-    use Assert\Assert;
-    use Somnambulist\ValueObjects\AbstractValueObject;
-    
-    class Uuid extends AbstractValueObject
-    {
-    
-        /**
-         * @var string
-         */
-        private $uuid;
-    
-        /**
-         * Constructor.
-         *
-         * @param string $uuid
-         */
-        public function __construct(string $uuid)
-        {
-            Assert::that($uuid, null, 'uuid')->notEmpty()->uuid();
-    
-            $this->uuid = $uuid;
-        }
-    
-        /**
-         * @return string
-         */
-        public function toString(): string
-        {
-            return $this->uuid;
-        }
-    }
-    
-    $uuid = new Uuid(\Ramsey\Uuid\Uuid::uuid4());
+```php
+use Assert\Assert;
+use Somnambulist\ValueObjects\AbstractValueObject;
 
+class Uuid extends AbstractValueObject
+{
+
+    /**
+     * @var string
+     */
+    private $uuid;
+
+    /**
+     * Constructor.
+     *
+     * @param string $uuid
+     */
+    public function __construct(string $uuid)
+    {
+        Assert::that($uuid, null, 'uuid')->notEmpty()->uuid();
+
+        $this->uuid = $uuid;
+    }
+
+    /**
+     * @return string
+     */
+    public function toString(): string
+    {
+        return $this->uuid;
+    }
+}
+
+$uuid = new Uuid(\Ramsey\Uuid\Uuid::uuid4());
+```
 
 #### Usage with Doctrine
 
