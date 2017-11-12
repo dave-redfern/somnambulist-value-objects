@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+2017-11-12
+----------
+
+ * added mappings() to country code mappings to allow fetching all mappings
+
 2017-09-02
 ----------
 

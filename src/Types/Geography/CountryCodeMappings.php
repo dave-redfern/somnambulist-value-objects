@@ -38,6 +38,14 @@ class CountryCodeMappings
     }
 
     /**
+     * @return array
+     */
+    public static function mappings()
+    {
+        return static::$mappings;
+    }
+
+    /**
      * @var array
      */
     private static $mappings = [
