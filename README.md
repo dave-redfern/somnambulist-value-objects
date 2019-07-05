@@ -1,3 +1,7 @@
+# Moved to https://github.com/dave-redfern/somnambulist-domain
+
+This repository has been archived. Please update to the combined package.s
+
 ## Value Objects Library
 
 Value Objects (VOs) are Immutable domain objects that represent some value in your domain model but without
